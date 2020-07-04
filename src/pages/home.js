@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Scream from '../components/Scream';
 
-class Home extends Component {
+class home extends Component {
   state = {
     screams: null,
   };
@@ -23,7 +23,7 @@ class Home extends Component {
   render() {
     let recentScreamsMarkup = this.state.screams ? (
       this.state.screams.map((scream) => (
-        <Scream scream={scream} />
+        <Scream scream={scream} key={scream.screamId} />
       ))
     ) : (
       <p>Loading ...</p>
@@ -41,4 +41,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default home;
