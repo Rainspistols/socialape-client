@@ -78,9 +78,9 @@ export const editUserDetails = (userDetails) => (dispatch) => {
   axios
     .post('/user', userDetails)
     .then(() => {
-      dispatch(getUserData);
+      dispatch(getUserData());
     })
-    .catch(err);
+    .catch((err) => console.log(err));
 };
 
 const setAuthorizationHeader = (token) => {

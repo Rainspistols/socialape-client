@@ -5,19 +5,22 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
 import { editUserDetails } from '../redux/actions/userActions';
 // MUI Stuff
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton ';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 // Icons
 import EditIcon from '@material-ui/icons/Edit';
 
 const styles = (theme) => ({
-  ...theme,
+  ...theme.spreadIt,
+  button: {
+    float: 'right',
+  },
 });
 
 class EditDetails extends Component {
@@ -27,27 +30,43 @@ class EditDetails extends Component {
     location: '',
     open: false,
   };
-
+  mapUserDetailsToState = (credentials) => {
+    this.setState({
+      bio: credentials.bio ? credentials.bio : '',
+      wdbsite: credentials.wdbsite ? credentials.wdbsite : '',
+      location: credentials.location ? credentials.location : '',
+    });
+  };
   componentDidMount() {
     const { credentials } = this.props;
-    mapUserDetailsToState(credentials);
+    this.mapUserDetailsToState(credentials);
   }
+  handleOpen = () => {
+    this.setState({ open: true });
+    this.mapUserDetailsToState(this.props.credentials);
+  };
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+  handleSubmit = () => {
+    const userDetails = {
+      bio: this.state.bio,
+      website: this.state.website,
+      location: this.state.location,
+    };
+    this.props.editUserDetails(userDetails);
+    this.handleClose();
+  };
+
   render() {
     const { classes } = this.props;
-    handleOpen = () => {
-      this.setState({ open: true });
-      mapUserDetailsToState(this.props.credentials);
-    };
-    handleClose = () => {
-      this.setState({ open: false });
-    };
-    mapUserDetailsToState = (credentials) => {
-      this.setState({
-        bio: credentials.bio ? credentials.bio : '',
-        wdbsite: credentials.wdbsite ? credentials.wdbsite : '',
-        location: credentials.location ? credentials.location : '',
-      });
-    };
+
     return (
       <Fragment>
         <Tooltip title='Edit details' placement='top'>
@@ -73,7 +92,7 @@ class EditDetails extends Component {
                 placeholder='A short bio about yourself'
                 className={classes.textField}
                 value={this.state.bio}
-                onChange={this.onChange}
+                onChange={this.handleChange}
                 fullWidth
               />
               <TextField
@@ -83,7 +102,7 @@ class EditDetails extends Component {
                 placeholder='Your personal/professional website'
                 className={classes.textField}
                 value={this.state.website}
-                onChange={this.onChange}
+                onChange={this.handleChange}
                 fullWidth
               />
               <TextField
@@ -93,18 +112,26 @@ class EditDetails extends Component {
                 placeholder='Where you live'
                 className={classes.textField}
                 value={this.state.location}
-                onChange={this.onChange}
+                onChange={this.handleChange}
                 fullWidth
               />
             </form>
           </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color='primary'>
+              Cancel
+            </Button>
+            <Button onClick={this.handleSubmit} color='primary'>
+              Save
+            </Button>
+          </DialogActions>
         </Dialog>
       </Fragment>
     );
   }
 }
 
-EditDetails.PropTypes = {
+EditDetails.propTypes = {
   editUserDetails: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
