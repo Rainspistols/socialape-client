@@ -28,7 +28,7 @@ const styles = (theme) => ({
     '& .image-wrapper': {
       textAlign: 'center',
       position: 'relative',
-      '& button': {
+      '& button': { 
         position: 'absolute',
         top: '80%',
         left: '70%',

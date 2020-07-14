@@ -6,20 +6,19 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import themeFile from './util/theme';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
-
+// Components
+import Navbar from './components/layout/Navbar';
+import AuthRoute from './util/AuthRoute';
 // Redux
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { SET_AUTHENTICATED } from './redux/types';
 import { logoutUser, getUserData } from './redux/actions/userActions';
-// Components
-import Navbar from './components/layout/Navbar';
-import AuthRoute from './util/AuthRoute';
-
 // Pages
 import home from './pages/home.js';
 import login from './pages/login.js';
 import signup from './pages/signup.js';
+import user from './pages/user.js';
 
 const theme = createMuiTheme(themeFile);
 
@@ -47,6 +46,7 @@ function App() {
               <Route path='/' exact component={home} />
               <AuthRoute path='/login' exact component={login} />
               <AuthRoute path='/signup' exact component={signup} />
+              <Route path='/users/:handle' exact component={user} />
             </Switch>
           </div>
         </Router>
