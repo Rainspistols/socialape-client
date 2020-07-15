@@ -92,6 +92,7 @@ export default {
     },
     buttons: {
       textAlign: 'center',
+      display: 'block',
       '& a': {
         margin: '20px 10px',
       },

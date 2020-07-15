@@ -36,7 +36,7 @@ if (token) {
 }
 
 axios.defaults.baseURL =
-  'https://europe-west3-socialape-4a360.cloudfunctions.net/api ';
+  'https://europe-west3-socialape-4a360.cloudfunctions.net/api';
 
 function App() {
   return (

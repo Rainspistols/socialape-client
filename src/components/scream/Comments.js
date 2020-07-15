@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 const styles = (theme) => ({
   ...theme.spreadIt,
   commentImage: {
-    maxWidth: '100%',
+    width: 100,
     height: 100,
     objectFit: 'cover',
     borderRadius: '50%',
@@ -18,13 +18,16 @@ const styles = (theme) => ({
   commentData: {
     marginLeft: 20,
   },
+  commentWrap: {
+    padding: '0 20px 20px 20px',
+  },
 });
 
 class Comments extends Component {
   render() {
     const { comments, classes } = this.props;
     return (
-      <Grid container>
+      <Grid container className={classes.commentWrap}>
         {comments.map((comment, index) => {
           const { body, createdAt, userImage, userHandle } = comment;
           return (

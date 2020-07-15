@@ -24,11 +24,10 @@ import { getScream, clearErrors } from '../../redux/actions/dataActions';
 const styles = (theme) => ({
   ...theme.spreadIt,
   profileImage: {
-    maxWidth: 200,
+    width: 200,
     height: 200,
     borderRadius: '50%',
     objectFit: 'cover',
-    overflow: 'hidden',
   },
   dialogContent: {
     padding: 20,
