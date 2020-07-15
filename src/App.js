@@ -6,6 +6,7 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import themeFile from './util/theme';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 // Components
 import Navbar from './components/layout/Navbar';
 import AuthRoute from './util/AuthRoute';
@@ -23,6 +24,7 @@ import user from './pages/user.js';
 const theme = createMuiTheme(themeFile);
 
 const token = localStorage.FBIdToken;
+
 if (token) {
   const decodedToken = jwtDecode(token);
   if (decodedToken.exp * 1000 < Date.now()) {
@@ -62,5 +64,9 @@ function App() {
     </MuiThemeProvider>
   );
 }
+
+App.propTypes = {
+  getUserData: PropTypes.func.isRequired,
+};
 
 export default App;

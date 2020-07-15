@@ -30,7 +30,7 @@ export const loginUser = (userData, history) => (dispatch) => {
 export const getUserData = () => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .get('/user')
+    .get('https://europe-west3-socialape-4a360.cloudfunctions.net/api/user')
     .then((res) => {
       dispatch({
         type: SET_USER,

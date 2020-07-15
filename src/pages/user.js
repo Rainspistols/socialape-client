@@ -21,6 +21,7 @@ class user extends Component {
     const screamId = this.props.match.params.screamId;
 
     if (screamId) this.setState({ screamIdParam: screamId });
+
     this.props.getUserData(handle);
     axios
       .get(`/user/${handle}`)
